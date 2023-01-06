@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-from family.models import Relatives, Pets, Vehicles
+from family.models import Relatives, Pet, Vehicle
 from family.forms import Family, Pets, Vehicles
 
 
@@ -17,7 +17,7 @@ def AddRelative(request):
     elif request.method == 'POST':
         form = Family(request.POST)
         if form.is_valid():
-            Family.objects.create(
+            Relatives.objects.create(
                 name=form.cleaned_data['name'],
                 age=form.cleaned_data['age'],
                 work=form.cleaned_data['work'],
@@ -44,7 +44,7 @@ def AddPet(request):
     elif request.method == 'POST':
         form = Pets(request.POST)
         if form.is_valid():
-            Pets.objects.create(
+            Pet.objects.create(
                 Name=form.cleaned_data['Name'],
                 Age=form.cleaned_data['Age'],
                 PetRace=form.cleaned_data['Race'],
@@ -71,7 +71,7 @@ def AddVehicle(request):
     elif request.method == 'POST':
         form = Vehicles(request.POST)
         if form.is_valid():
-            Vehicles.objects.create(
+            Vehicle.objects.create(
                 Brand=form.cleaned_data['Brand'],
                 Model=form.cleaned_data['Model'],
                 Colour=form.cleaned_data['Colour'],
@@ -113,3 +113,10 @@ def V_List(request):
         'Family':all_Vehicles,
     }
     return render(request, 'Vehicle.html', context=context)
+
+def Search(request):
+    return render(request, 'search.html')
+
+def SearchByName(request):
+    res = (f'Looking...')
+    return HttpResponse(res)

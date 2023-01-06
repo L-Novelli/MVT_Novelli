@@ -10,7 +10,7 @@ class Relatives(models.Model):
     
     
     
-class Pets(models.Model):
+class Pet(models.Model):
     PetRace = models.CharField(max_length=100)
     Age = models.FloatField()
     Name = models.CharField(max_length=100)
@@ -20,7 +20,7 @@ class Pets(models.Model):
     
     
     
-class Vehicles(models.Model):
+class Vehicle(models.Model):
     Brand = models.CharField(max_length=100)
     Model = models.CharField(max_length=100)
     Colour = models.CharField(max_length=100)

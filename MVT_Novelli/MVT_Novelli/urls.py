@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from family.views import AddRelative, FamList, AddPet, PetList, AddVehicle, V_List
+from family.views import AddRelative, FamList, AddPet, PetList, AddVehicle, V_List, Search
 from .views import index
 
 
@@ -10,11 +10,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
    
     path('fam-list/', FamList),
-    path('add-member', AddRelative),
+    path('fam-list/add-member', AddRelative),
        
     path('pet-list/', PetList),
-    path('add-pet', AddPet),
+    path('pet-list/add-pet', AddPet),
     
     path('v-list/', V_List),
-    path('add-vehicle', AddVehicle),
+    path('v-list/add-vehicle', AddVehicle),
+    
+    path('search', Search),
     ]
