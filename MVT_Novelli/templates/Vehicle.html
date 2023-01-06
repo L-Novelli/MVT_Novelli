@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block content %}
+    <h1>Vehicles list</h1>
+
+    <table border="1">
+        {% for v in Vehicles %}
+        <tr>
+            <td>Brand: {{Vehicles.Brand}} </td>
+            <td>Model: {{Vehicles.Model}} </td>
+            <td>Colour: {{Vehicles.Colour}} </td>
+    {% endfor %}
+    </table>
+    <br><h4>Add Veichle </h4> <a href="/fam-list/add-vehicle" class="btn btn-primary">ADD</a>
+{% endblock %}
+  

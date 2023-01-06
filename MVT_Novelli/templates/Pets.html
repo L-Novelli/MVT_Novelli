@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block content %}
+    <h1>Pets  list</h1>
+
+    <table border="1">
+        {% for pet in Pets %}
+        <tr>
+            <td>Name: {{pet.Name}} </td>
+            <td>Age: {{pet.age}} </td>
+            <td>Race: {{pet.PetRace}} </td>
+    {% endfor %}
+    </table>
+    <br><h4>Add PEt </h4> <a href="add-pet" class="btn btn-primary">ADD</a>
+{% endblock %}
+   
+

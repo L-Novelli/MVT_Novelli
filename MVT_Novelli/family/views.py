@@ -1,20 +1,115 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.urls import reverse
-from django.shortcuts import redirect
 
-from family.models import Family
 
-# Create your views here.
-def AddFamMember(request):
-    new_member = Family.objects.create(name = 'Max', age = 2.7, work = False)
-    print(new_member)
-    return HttpResponse('New family member added')
+from family.models import Relatives, Pets, Vehicles
+from family.forms import Family, Pets, Vehicles
+
+
+def AddRelative(request):
+    if request.method == 'GET':
+        context = {
+            'form': Family()
+        }
+
+        return render(request, 'addRelative.html', context=context)
+
+    elif request.method == 'POST':
+        form = Family(request.POST)
+        if form.is_valid():
+            Family.objects.create(
+                name=form.cleaned_data['name'],
+                age=form.cleaned_data['age'],
+                work=form.cleaned_data['work'],
+            )
+            context = {
+                'message': 'added successfully'
+            }
+            return render(request, 'addRelative.html', context=context)
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': Family()
+            }
+            return render(request, 'addRelative.html', context=context)
+
+def AddPet(request):
+    if request.method == 'GET':
+        context = {
+            'form': Pets()
+        }
+
+        return render(request, 'addPet.html', context=context)
+
+    elif request.method == 'POST':
+        form = Pets(request.POST)
+        if form.is_valid():
+            Pets.objects.create(
+                Name=form.cleaned_data['Name'],
+                Age=form.cleaned_data['Age'],
+                PetRace=form.cleaned_data['Race'],
+            )
+            context = {
+                'message': 'added successfully'
+            }
+            return render(request, '', context=context)
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': Pets()
+            }
+            return render(request, 'addPet.html', context=context)
+
+def AddVehicle(request):
+    if request.method == 'GET':
+        context = {
+            'form': Vehicles()
+        }
+
+        return render(request, 'addVehicle.html', context=context)
+
+    elif request.method == 'POST':
+        form = Vehicles(request.POST)
+        if form.is_valid():
+            Vehicles.objects.create(
+                Brand=form.cleaned_data['Brand'],
+                Model=form.cleaned_data['Model'],
+                Colour=form.cleaned_data['Colour'],
+            )
+            context = {
+                'message': 'added successfully'
+            }
+            return render(request, 'addVehicle.html', context=context)
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': Vehicles()
+            }
+            return render(request, 'addVehicle.html', context=context)
+
 
 def FamList(request):
-    all_Family = Family.objects.all()
+    all_Family = Relatives.objects.all()
     print(all_Family)
     context = {
         'Family':all_Family,
     }
     return render(request, 'Family.html', context=context)
+
+
+def PetList(request):
+    all_Pets = Pets.objects.all()
+    print(all_Pets)
+    context = {
+        'Family':all_Pets,
+    }
+    return render(request, 'Pets.html', context=context)
+
+
+def V_List(request):
+    all_Vehicles = Vehicles.objects.all()
+    print(all_Vehicles)
+    context = {
+        'Family':all_Vehicles,
+    }
+    return render(request, 'Vehicle.html', context=context)
