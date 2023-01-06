@@ -103,9 +103,9 @@ def FamList(request):
 def PetList(request):
     if 'search' in request.GET:
         search = request.GET['search']
-        all_Pets = Pets.objects.filter(name__icontains=search) 
+        all_Pets = Pet.objects.filter(Name__icontains=search) 
     else:   
-        all_Pets = Pets.objects.all()
+        all_Pets = Pet.objects.all()
     context = {
         'Pets':all_Pets,
     }
@@ -115,9 +115,9 @@ def PetList(request):
 def V_List(request):
     if 'search' in request.GET:
         search = request.GET['search']
-        all_Vehicles = Vehicles.objects.filter(model__icontains = search) 
+        all_Vehicles = Vehicle.objects.filter(Model__icontains = search) 
     else:   
-        all_Vehicles = Vehicles.objects.all()  
+        all_Vehicles = Vehicle.objects.all()  
     context = {
         'Vehicle':all_Vehicles,
     }
