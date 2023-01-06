@@ -47,12 +47,12 @@ def AddPet(request):
             Pet.objects.create(
                 Name=form.cleaned_data['Name'],
                 Age=form.cleaned_data['Age'],
-                PetRace=form.cleaned_data['Race'],
+                PetRace=form.cleaned_data['PetRace'],
             )
             context = {
                 'message': 'added successfully'
             }
-            return render(request, '', context=context)
+            return render(request, 'addPet.html', context=context)
         else:
             context = {
                 'form_errors': form.errors,
@@ -89,8 +89,11 @@ def AddVehicle(request):
 
 
 def FamList(request):
-    all_Family = Relatives.objects.all()
-    print(all_Family)
+    if 'search' in request.GET:
+        search = request.GET['search']
+        all_Family = Relatives.objects.filter(name__icontains=search) 
+    else:
+        all_Family = Relatives.objects.all()   
     context = {
         'Family':all_Family,
     }
@@ -98,25 +101,24 @@ def FamList(request):
 
 
 def PetList(request):
-    all_Pets = Pets.objects.all()
-    print(all_Pets)
+    if 'search' in request.GET:
+        search = request.GET['search']
+        all_Pets = Pets.objects.filter(name__icontains=search) 
+    else:   
+        all_Pets = Pets.objects.all()
     context = {
-        'Family':all_Pets,
+        'Pets':all_Pets,
     }
     return render(request, 'Pets.html', context=context)
 
 
 def V_List(request):
-    all_Vehicles = Vehicles.objects.all()
-    print(all_Vehicles)
+    if 'search' in request.GET:
+        search = request.GET['search']
+        all_Vehicles = Vehicles.objects.filter(model__icontains = search) 
+    else:   
+        all_Vehicles = Vehicles.objects.all()  
     context = {
-        'Family':all_Vehicles,
+        'Vehicle':all_Vehicles,
     }
     return render(request, 'Vehicle.html', context=context)
-
-def Search(request):
-    return render(request, 'search.html')
-
-def SearchByName(request):
-    res = (f'Looking...')
-    return HttpResponse(res)

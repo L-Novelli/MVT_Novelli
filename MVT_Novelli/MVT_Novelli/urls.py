@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from family.views import AddRelative, FamList, AddPet, PetList, AddVehicle, V_List, Search
+from family.views import AddRelative, FamList, AddPet, PetList, AddVehicle, V_List
 from .views import index
 
 
@@ -17,6 +17,4 @@ urlpatterns = [
     
     path('v-list/', V_List),
     path('v-list/add-vehicle', AddVehicle),
-    
-    path('search', Search),
     ]
